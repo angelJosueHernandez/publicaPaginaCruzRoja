@@ -180,7 +180,7 @@ const showLoader = () => {
         tokenUsuario: tokenUser
       };
   
-      fetch(`http://localhost:3000/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
+      fetch(`https://apicruzroja.onrender.com/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -300,7 +300,7 @@ const showLoader = () => {
       setHasExpiredOnce(true); // Marcar que ha expirado una vez
 
       // Llamar a la ruta para actualizar el token solo si remainingTime llega a 0
-      fetch("http://localhost:3000/actualizarToken", {
+      fetch("https://apicruzroja.onrender.com/actualizarToken", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -329,7 +329,7 @@ const showLoader = () => {
     };
   
     fetch(
-      `http://localhost:3000/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
+      `https://apicruzroja.onrender.com/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
       {
         method: "POST",
         headers: {

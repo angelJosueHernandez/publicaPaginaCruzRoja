@@ -19,7 +19,7 @@ const RegistroCitasForm = ({ onSubmit }) => {
     const fetchData = async () => {
       try {
         // Llamada a la API para obtener los tipos de servicio
-        const responseServicios = await fetch('http://localhost:3000/tiposServicio');
+        const responseServicios = await fetch('https://apicruzroja.onrender.com/tiposServicio');
         const servicios = await responseServicios.json();
         
         // Llamada a la API para obtener los tipos de cargo (ajusta la URL si es necesario)

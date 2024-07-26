@@ -75,7 +75,7 @@ export default function Nav() {
 
     if (token) {
       try {
-        fetch('http://localhost:3000/verifyToken', {
+        fetch('https://apicruzroja.onrender.com/verifyToken', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

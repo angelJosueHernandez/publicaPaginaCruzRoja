@@ -217,7 +217,7 @@ const showLoader = () => {
       }
   
       fetch(
-        "http://localhost:3000/user/" + email,
+        "https://apicruzroja.onrender.com/user/" + email,
         {
           method: "POST",
           credentials: 'include',
@@ -235,7 +235,7 @@ const showLoader = () => {
           .then((valid) => {
             if (valid) {
               fetch(
-                "http://localhost:3000/user",
+                "https://apicruzroja.onrender.com/user",
                 {
                   method: "POST",
                   credentials: 'include',

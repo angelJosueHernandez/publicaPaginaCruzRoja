@@ -64,7 +64,7 @@ export default function Form() {
         contraseña: password
       };
   
-      fetch("http://localhost:3000/user/authenticate", {
+      fetch("https://apicruzroja.onrender.com/user/authenticate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -128,7 +128,7 @@ export default function Form() {
     };
   
     fetch(
-      `http://localhost:3000/userCuenta/${encodeURIComponent(email)}`,
+      `https://apicruzroja.onrender.com/userCuenta/${encodeURIComponent(email)}`,
       {
         method: "PUT",
         headers: {
@@ -156,7 +156,7 @@ export default function Form() {
     };
   
     fetch(
-      `http://localhost:3000/enviarverificacionCorreo/${encodeURIComponent(email)}`,
+      `https://apicruzroja.onrender.com/enviarverificacionCorreo/${encodeURIComponent(email)}`,
       {
         method: "POST",
         headers: {
@@ -233,7 +233,7 @@ export default function Form() {
       correo: correo
     };
   
-    fetch("http://localhost:3000/notiCorreoCuentaBloqueada/" + encodeURIComponent(correo), {
+    fetch("https://apicruzroja.onrender.com/notiCorreoCuentaBloqueada/" + encodeURIComponent(correo), {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
