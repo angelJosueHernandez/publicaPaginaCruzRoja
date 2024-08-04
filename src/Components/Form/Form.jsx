@@ -64,7 +64,7 @@ export default function Form() {
         contraseña: password
       };
   
-      fetch("https://apicruzroja.onrender.com/user/authenticate", {
+      fetch("http://localhost:3000/user/authenticate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -128,7 +128,7 @@ export default function Form() {
     };
   
     fetch(
-      `https://apicruzroja.onrender.com/userCuenta/${encodeURIComponent(email)}`,
+      `http://localhost:3000/userCuenta/${encodeURIComponent(email)}`,
       {
         method: "PUT",
         headers: {
@@ -156,7 +156,7 @@ export default function Form() {
     };
   
     fetch(
-      `https://apicruzroja.onrender.com/enviarverificacionCorreo/${encodeURIComponent(email)}`,
+      `http://localhost:3000/enviarverificacionCorreo/${encodeURIComponent(email)}`,
       {
         method: "POST",
         headers: {
@@ -233,7 +233,7 @@ export default function Form() {
       correo: correo
     };
   
-    fetch("https://apicruzroja.onrender.com/notiCorreoCuentaBloqueada/" + encodeURIComponent(correo), {
+    fetch("http://localhost:3000/notiCorreoCuentaBloqueada/" + encodeURIComponent(correo), {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -337,8 +337,8 @@ export default function Form() {
           <div className='cont-remen'>
             <ReCAPTCHA
               ref={captcha}
-              sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
-               //sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
+              //sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
+               sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
               onChange={handleChangeCaptcha}
             />
           </div>

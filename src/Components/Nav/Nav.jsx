@@ -10,7 +10,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { jwtDecode } from 'jwt-decode';
 import { Avatar, Badge, Space, message } from 'antd';
 import './Nav.css'; // Importa tus estilos personalizados aquí
-import { IconButton, Navbar, MobileNav,Typography,  Button, Menu, MenuHandler,MenuList, MenuItem, Card} from '@material-tailwind/react';
+import { IconButton, Navbar, MobileNav, Typography, Button, Menu, MenuHandler, MenuList, MenuItem, Card } from '@material-tailwind/react';
 import avatar from '@material-tailwind/react';
 import {
   CubeTransparentIcon,
@@ -25,8 +25,7 @@ import {
   RocketLaunchIcon,
   Bars2Icon,
 } from "@heroicons/react/24/solid";
-
-
+import Cookies from 'js-cookie';
 
 const profileMenuItems = [
   {
@@ -44,91 +43,120 @@ const profileMenuItems = [
     icon: LifebuoyIcon,
     path: "Ayuda"
   },
- 
 ];
-
 
 export default function Nav() {
   const [isNavLinksShowing, setIsNavLinksShowing] = useState(false);
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const { setIsAuthenticated, isAuthenticated, setCorreoCookieUser, setIdCookieUser, setNombreCookieUser } = useAuth();
   const navigate = useNavigate();
   const [userName, setUserName] = useState(null);
   const [avatarColor, setAvatarColor] = useState(null);
-
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
  
   const closeMenu = () => setIsMenuOpen(false);
 
   const getCookie = (name) => {
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith(name + '=')) {
-            return cookie.substring(name.length + 1);
-        }
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(name + '=')) {
+        return cookie.substring(name.length + 1);
+      }
     }
     return null;
   };
 
   useEffect(() => {
-    const token = getCookie('jwt');
+    const fetchData = () => {
+      const token = Cookies.get('jwt');
+      if (token) {
+        try {
+          fetch('http://localhost:3000/verifyToken', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ token }),
+            credentials: 'include'
+          })
+          .then(response => response.json())
+          .then(result => {
+            if (result.mensaje === "Token válido") {
+              const decodedToken = jwtDecode(token);
+              setIsAuthenticated(decodedToken.IsAuthenticated);
+              setUserName(decodedToken.nombre);
+              setCorreoCookieUser(decodedToken.correo);
+              setIdCookieUser(decodedToken.id);
+              setNombreCookieUser(decodedToken.nombre);
 
-    if (token) {
-      try {
-        fetch('https://apicruzroja.onrender.com/verifyToken', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ token }),
-          credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(result => {
-          if (result.mensaje === "Token válido") {
-            const decodedToken = jwtDecode(token);
-            setIsAuthenticated(decodedToken.IsAuthenticated);
-            setUserName(decodedToken.nombre);
-
-            // Retrieve avatar color from localStorage if available, otherwise generate a new color
-            const storedColor = localStorage.getItem('avatarColor');
-            const color = storedColor ? storedColor : getRandomColor();
-            setAvatarColor(color);
-            // Store the color in localStorage
-            localStorage.setItem('avatarColor', color);
-          } else {
+              const storedColor = localStorage.getItem('avatarColor');
+              const color = storedColor ? storedColor : getRandomColor();
+              setAvatarColor(color);
+              localStorage.setItem('avatarColor', color);
+            } else {
+              setIsAuthenticated(false);
+            }
+          })
+          .catch(error => {
+            console.error('Error al verificar el token:', error);
             setIsAuthenticated(false);
-          }
-        })
-        .catch(error => {
-          console.error('Error al verificar el token:', error);
+          });
+        } catch (error) {
+          console.error('Error al decodificar el token JWT:', error);
           setIsAuthenticated(false);
-        });
-      } catch (error) {
-        console.error('Error al decodificar el token JWT:', error);
-        setIsAuthenticated(false);
+        }
       }
-    }
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 1000); // 5 minutos
+
+    return () => clearInterval(interval);
   }, [setIsAuthenticated]);
-  
-  
+
   const handleLogout = () => {
-    message.loading('Cerrando Sesión', 2.5) // Establece la duración del mensaje de carga en 1.5 segundos
+    message.loading('Cerrando Sesión', 2.5)
       .then(() => {
         setIsAuthenticated(false);
-        // Elimina la cookie del token JWT
         document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         navigate('/Login');
       });
-      
   };
 
-  // Función para obtener un color aleatorio
-  const getRandomColor = () => {
+  const getRandomColor2 = () => {
     const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
     const randomIndex = Math.floor(Math.random() * colorList.length);
     return colorList[randomIndex];
   };
+
+
+  const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    let isDark = true;
+    
+    while (isDark) {
+      color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      
+      const r = parseInt(color.substring(1, 3), 16);
+      const g = parseInt(color.substring(3, 5), 16);
+      const b = parseInt(color.substring(5, 7), 16);
+      
+      // Calculate the luminance of the color
+      const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+      
+      // Check if the color is bright enough
+      if (luminance > 128) {
+        isDark = false;
+      }
+    }
+    
+    return color;
+  };
+  
 
   return (
     <nav className='navShadow'>
@@ -147,82 +175,68 @@ export default function Nav() {
           ))}
           {isAuthenticated ? (
             <>
-<li>
-<div className="MenuDes">
-<Menu  className="" open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
-      <MenuHandler>
-        <Button
-          variant="text"
-          color="blue-gray"
-          className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto menuUser"
-        >
-          <Avatar
-  variant="circular"
-  size="sm"
-  alt={userName}
-  className="border border-white-900 p-0.5"
-  style={{
-    backgroundColor: avatarColor,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }}
->
-  <span style={{ fontSize: '20px', color: 'white',marginLeft: '-10px' }}>
-    {userName && userName.charAt(0).toUpperCase()}
-  </span>
-</Avatar>
-
-          <ChevronDownIcon
-            strokeWidth={2.5}
-            className={`h-3 w-3 transition-transform ${
-              isMenuOpen ? "rotate-180" : ""
-            }`}
-          />
-        </Button>
-      </MenuHandler>
-      <MenuList className="p-1 menuUser">
-    {profileMenuItems.map(({ label, icon, path }, key) => {
-      const isLastItem = key === profileMenuItems.length - 1;
-      return (
-        <NavLink to={path} key={label} onClick={closeMenu}>
-          <MenuItem
-            className={`flex items-center gap-2 rounded menu-item hover:bg-gray-500/10 focus:bg-gray-500/10 active:bg-gray-500/10`}
-          >
-            {React.createElement(icon, {
-              className: `h-4 w-4 colorM`,
-              strokeWidth: 2,
-              
-            })}
-            <Typography
-              as="span"
-              variant="small"
-              className="font-normal colorM"
-            >
-              {label}
-            </Typography>
-          </MenuItem>
-        </NavLink>
-      );
-    })}
-    {isAuthenticated && (
-      <MenuItem
-        onClick={() => {
-          closeMenu();
-          handleLogout();
-        }}
-        className="flex items-center gap-2 rounded  hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 menu-item2 "
-      >
-        <PowerIcon className="h-4 w-4" strokeWidth={2} color='red'/>
-        <Typography as="span" variant="small" className="font-normal" color='red'>
-          Cerrar Sesión
-        </Typography>
-      </MenuItem>
-    )}
-  </MenuList>
-    </Menu>
-    </div>
-</li>
+              <li>
+                <div className="MenuDes">
+                  <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
+                    <MenuHandler>
+                      <Button
+                        variant="text"
+                        color="blue-gray"
+                        className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto menuUser"
+                      >
+                        <Avatar
+                          variant="circular"
+                          size="sm"
+                          alt={userName}
+                          className="border border-white-900 p-0.5"
+                          style={{
+                            backgroundColor: avatarColor,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <span style={{ fontSize: '20px', color: 'white', marginLeft: '-10px' }}>
+                            {userName && userName.charAt(0).toUpperCase()}
+                          </span>
+                        </Avatar>
+                        <ChevronDownIcon
+                          strokeWidth={2.5}
+                          className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""}`}
+                        />
+                      </Button>
+                    </MenuHandler>
+                    <MenuList className="p-1 menuUser">
+                      {profileMenuItems.map(({ label, icon, path }, key) => (
+                        <NavLink to={path} key={label} onClick={closeMenu}>
+                          <MenuItem
+                            className="flex items-center gap-2 rounded menu-item hover:bg-gray-500/10 focus:bg-gray-500/10 active:bg-gray-500/10"
+                          >
+                            {React.createElement(icon, { className: 'h-4 w-4 colorM', strokeWidth: 2 })}
+                            <Typography as="span" variant="small" className="font-normal colorM">
+                              {label}
+                            </Typography>
+                          </MenuItem>
+                        </NavLink>
+                      ))}
+                      {isAuthenticated && (
+                        <MenuItem
+                          onClick={() => {
+                            closeMenu();
+                            handleLogout();
+                          }}
+                          className="flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 menu-item2"
+                        >
+                          <PowerIcon className="h-4 w-4" strokeWidth={2} color="red"/>
+                          <Typography as="span" variant="small" className="font-normal" color="red">
+                            Cerrar Sesión
+                          </Typography>
+                        </MenuItem>
+                      )}
+                    </MenuList>
+                  </Menu>
+                </div>
+              </li>
             </>
           ) : (
             authLinks.map((item, index) => (
@@ -242,61 +256,3 @@ export default function Nav() {
     </nav>
   );
 }
-
-
-
-
-
-
-{/*
-              <li>
-                <NavLink to="/Perfil" className={({ isActive }) => isActive ? 'active' : ''}>
-                <Badge dot>
-                  <Avatar 
-                   // Clase CSS para centrar el Avatar
-                    style={{ 
-                      backgroundColor: avatarColor, 
-                      verticalAlign: 'middle', 
-                      fontSize: '4px', // Ajustar el tamaño de la letra
-                      lineHeight: '2px', // Ajustar la altura de línea para centrar verticalmente la letra
-                      display: 'flex', // Establecer el contenedor como flex
-                      alignItems: 'center', // Centrar verticalmente los elementos dentro del contenedor
-                      justifyContent: 'center',  // Establecer la altura del Avatar
-                      borderRadius: '50%',
-                     // Hacer que el Avatar sea un círculo
-                    }}
-                    size={25} // Reducir el tamaño del Avatar
-                  >
-                   <div  className='nombreAvatar' style={{ 
-
-                      backgroundColor: avatarColor, 
-                      verticalAlign: 'middle',
-                      fontSize: '16px', // Ajustar el tamaño de la letra
-                      lineHeight: '2px', // Ajustar la altura de línea para centrar verticalmente la letra
-                      display: 'flex', // Establecer el contenedor como flex
-                      alignItems: 'center', // Centrar verticalmente los elementos dentro del contenedor
-                      justifyContent: 'center',  // Establecer la altura del Avatar
-                      borderRadius: '50%',
-                      marginLeft: '-21px', // Posicionar el
-                     // Hacer que el Avatar sea un círculo
-                    }}>{userName && userName[0]}</div>  Muestra la primera letra del nombre 
-                    </Avatar>
-                    </Badge>
-                    <span className='name-navs'>Perfil</span>
-                  </NavLink>
-                </li>
-                <li>
-                  Utiliza Tailwind CSS para aplicar estilos al botón y mostrar el mensaje emergente 
-                  <NavLink to={'/'} className={({ isActive }) => isActive ? 'active' : ''}>
-                  <button 
-                    onClick={handleLogout} 
-                    className="hover:text-red-800 focus:outline-none relative group {({ isActive }) => isActive ? 'active' : ''}"
-                  >
-                    <LuLogOut className="text-xl relative icon-navs"/>
-                    <span className="name-navs absolute top-full left-1/2 transform -translate-x-1/2 bg-red-700 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      Cerrar sesión
-                    </span>
-                  </button>
-                  </NavLink>
-                </li>
-*/}

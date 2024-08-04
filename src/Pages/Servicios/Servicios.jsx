@@ -1,217 +1,261 @@
-import React, { useState, useMemo } from "react";
-import { Table, Input, Space, Select } from "antd";
-
+import React, { useState, useEffect, useMemo } from "react";
+import { Input, Select } from "antd";
+import { useNavigate } from "react-router-dom";
+import {jwtDecode} from 'jwt-decode';
+import './Servicios.css';
 const { Search } = Input;
 const { Option } = Select;
-
-const columns = [
-  {
-    title: "Servicio",
-    dataIndex: "servicio",
-    key: "servicio",
-    render: (text) => <p>{text}</p>,
-  },
-  {
-    title: "Organización",
-    dataIndex: "organizacion",
-    key: "organizacion",
-  },
-  {
-    title: "Ubicación",
-    dataIndex: "ubicacion",
-    key: "ubicacion",
-  },
-  {
-    title: "Descripción",
-    dataIndex: "descripcion",
-    key: "descripcion",
-  },
-];
+import { CheckIcon } from '@heroicons/react/20/solid';
+import { DefaultSkeleton } from "./DefaultSkeleton";
+import { SearchOutlined } from "@ant-design/icons";
+import ambu from '../../assets/img/ambu.png';
+import ser from '../../assets/img/ser.png';
+import Cookies from 'js-cookie';
+import { useAuth } from "../../Components/Contexts/AuthContexts";
+import { message } from 'antd';
 
 const Servicios = () => {
-  const [search, setSearch] = useState("");
-  const [filterOrganization, setFilterOrganization] = useState("");
-  const [filterLocation, setFilterLocation] = useState("");
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
-  const data=[
-    {
-      id: 1,
-      servicio: "Equipo de Rescate Urbano",
-      organizacion: "Cruz Roja Internacional",
-      ubicacion: "Ciudad Metrópolis",
-      descripcion: "Equipo especializado en rescate en entornos urbanos y estructuras colapsadas."
-    },
-    {
-      id: 2,
-      servicio: "Clínica Móvil de Atención Pediátrica",
-      organizacion: "Cruz Roja Nacional",
-      ubicacion: "Pueblo Soleado",
-      descripcion: "Unidad móvil dedicada a brindar atención médica a niños y adolescentes en comunidades rurales."
-    },
-    {
-      id: 3,
-      servicio: "Unidad de Apoyo Psicosocial",
-      organizacion: "Cruz Roja Local",
-      ubicacion: "Villa Esperanza",
-      descripcion: "Servicio que ofrece apoyo emocional y psicológico a personas afectadas por desastres o crisis."
-    },
-  
-    {
-      id: 4,
-      servicio: "Centro de Donación de Sangre",
-      organizacion: "Cruz Roja Regional",
-      ubicacion: "Ciudad Saludable",
-      descripcion: "Instalación dedicada a la recolección de sangre para emergencias médicas y transfusiones."
-    },
-    {
-      id: 5,
-      servicio: "Equipo de Logística para Emergencias",
-      organizacion: "Cruz Roja Internacional",
-      ubicacion: "Ciudad Logística",
-      descripcion: "Equipo especializado en la gestión eficiente de recursos y suministros durante situaciones de emergencia."
-    },
-    {
-      id: 6,
-      servicio: "Centro de Rehabilitación Física",
-      organizacion: "Cruz Roja Nacional",
-      ubicacion: "Pueblo Renacer",
-      descripcion: "Facilidad dedicada a la rehabilitación y fisioterapia para personas con discapacidades físicas temporales o permanentes."
-    },
-    {
-      id: 7,
-      servicio: "Brigada Canina de Búsqueda y Rescate",
-      organizacion: "Cruz Roja Local",
-      ubicacion: "Villa Canina",
-      descripcion: "Unidad canina entrenada para la búsqueda y rescate de personas en áreas afectadas por desastres naturales."
-    },
-    {
-      id: 8,
-      servicio: "Servicio de Educación en Salud",
-      organizacion: "Cruz Roja Regional",
-      ubicacion: "Ciudad Educación",
-      descripcion: "Programa educativo que proporciona información sobre salud, prevención de enfermedades y primeros auxilios a comunidades locales."
-    },
-    {
-      id: 9,
-      servicio: "Equipo de Intervención en Crisis",
-      organizacion: "Cruz Roja Internacional",
-      ubicacion: "Ciudad Esperanza",
-      descripcion: "Grupo especializado en proporcionar apoyo inmediato y recursos durante crisis humanitarias para mitigar el impacto emocional en las personas afectadas."
-    },
-    {
-      id: 10,
-      servicio: "Unidad de Telemedicina",
-      organizacion: "Cruz Roja Nacional",
-      ubicacion: "Pueblo Conectado",
-      descripcion: "Servicio que ofrece consultas médicas a distancia, brindando atención a comunidades remotas a través de tecnología de telemedicina."
-    },
-    {
-      id: 11,
-      servicio: "Equipo de Suministros de Emergencia",
-      organizacion: "Cruz Roja Local",
-      ubicacion: "Villa Abastecimiento",
-      descripcion: "Equipo encargado de la distribución eficiente de suministros esenciales durante desastres y emergencias, garantizando una respuesta rápida y efectiva."
-    },
-    {
-      id: 12,
-      servicio: "Centro de Recuperación Nutricional",
-      organizacion: "Cruz Roja Regional",
-      ubicacion: "Ciudad Nutrición",
-      descripcion: "Facilidad dedicada a la atención y recuperación de niños con desnutrición, proporcionando alimentos nutritivos y cuidado médico especializado."
-    },
-    {
-      id: 13,
-      servicio: "Equipo de Gestión de Información",
-      organizacion: "Cruz Roja Internacional",
-      ubicacion: "Ciudad Información",
-      descripcion: "Grupo especializado en recopilar, analizar y gestionar información relevante durante crisis humanitarias para facilitar una toma de decisiones informada."
-    },
-    {
-      id: 14,
-      servicio: "Centro de Capacitación en Primeros Auxilios",
-      organizacion: "Cruz Roja Nacional",
-      ubicacion: "Pueblo Seguro",
-      descripcion: "Instalación que ofrece cursos y capacitación en primeros auxilios a la comunidad, promoviendo la preparación y la respuesta rápida ante emergencias."
-    }
-  ]
+  const [search, setSearch] = useState("");
+  const [filterServicios, setFilterServicios] = useState("");
+  const [filterCostos, setFilterCostos] = useState("");
+  const [tiposServicio, setTiposServicio] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [logeo, setLogeo] = useState(null);
+
+  const costRanges = [
+    { label: 'Menos de $50', min: 0, max: 50 },
+    { label: '$50 - $100', min: 50, max: 100 },
+    { label: '$100 - $150', min: 100, max: 150 },
+    { label: '$150 - $200', min: 150, max: 200 },
+    { label: '$200 - $250', min: 200, max: 250 },
+    { label: '$250 - $300', min: 250, max: 300 },
+    { label: 'Más de $300', min: 300, max: Infinity }
+  ];
+
   const filteredData = useMemo(() => {
     const searchLower = search.toLowerCase();
-    
-    return data.filter((item) => {
-      const servicioLower = item.servicio.toLowerCase();
-      const descripcionLower = item.descripcion.toLowerCase();
-
+    const selectedRange = costRanges.find(range => range.label === filterCostos);
+    return tiposServicio.filter((item) => {
+      const servicioLower = item.servicio ? item.servicio.toLowerCase() : "";
+      const costos = item.costos ? parseFloat(item.costos) : 0;
       return (
-        (!search ||
-          servicioLower.includes(searchLower) ||
-          descripcionLower.includes(searchLower)) &&
-        (!filterOrganization || item.organizacion === filterOrganization) &&
-        (!filterLocation || item.ubicacion === filterLocation)
+        (!search || servicioLower.includes(searchLower)) &&
+        (!filterServicios || item.servicio === filterServicios) &&
+        (!selectedRange || (costos >= selectedRange.min && costos <= selectedRange.max))
       );
     });
-  }, [data, search, filterOrganization, filterLocation]);
-
-  const uniqueLocations = useMemo(
-    () => Array.from(new Set(data.map((item) => item.ubicacion))),
-    [data]
-  );
+  }, [tiposServicio, search, filterServicios, filterCostos]);
 
   const searcher = (value) => {
     setSearch(value);
   };
 
-  return (
-    <>
-      <div
-        style={{
-          maxWidth: "100%",
-          width: "1000px",
-          textAlign: "center",
-          display: "block",
-          margin: "auto",
-        }}
-      >
-        <Space>
-          <Search
-            placeholder="Ingrese su búsqueda"
-            value={search}
-            onChange={(e) => searcher(e.target.value)}
-            type="text"
-            className="form-control"
-          />
-          <Select
-            placeholder="Filtrar por organización"
-            value={filterOrganization}
-            onChange={setFilterOrganization}
-          >
-            <Option value="">Organización</Option>
-            <Option value="Cruz Roja Internacional">Cruz Roja Internacional</Option>
-            <Option value="Cruz Roja Nacional">Cruz Roja Nacional</Option>
-            <Option value="Cruz Roja Local">Cruz Roja Local</Option>
-            <Option value="Cruz Roja Regional">Cruz Roja Regional</Option>
-          </Select>
-          <Select
-            placeholder="Filtrar por ubicación"
-            value={filterLocation}
-            onChange={setFilterLocation}
-          >
-            <Option value="">Ubicación</Option>
-            {uniqueLocations.map((location) => (
-              <Option key={location} value={location}>
-                {location}
-              </Option>
-            ))}
-          </Select>
-        </Space>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/tiposServicio', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Error en la respuesta de la API');
+        }
+        const servicios = await response.json();
+        setTiposServicio(servicios);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error al obtener datos:', error);
+        setError(true);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
-        <Table
-          style={{ width: "100%", display: "block", margin: "auto" }}
-          columns={columns}
-          dataSource={filteredData}
-          rowKey="id"
-        />
+  useEffect(() => {
+    const token = Cookies.get('jwt');
+    if (token) {
+      try {
+        fetch('http://localhost:3000/verifyToken', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ token }),
+          credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(result => {
+          if (result.mensaje === "Token válido") {
+            const decodedToken = jwtDecode(token);
+            setLogeo(decodedToken.IsAuthenticated);
+            setUserId(decodedToken.id);
+          } else {
+            setLogeo(false);
+          }
+        })
+        .catch(error => {
+          console.error('Error al verificar el token:', error);
+          setLogeo(false);
+        });
+      } catch (error) {
+        console.error('Error al decodificar el token JWT:', error);
+        setLogeo(false);
+      }
+    }
+  }, []);
+
+  if (loading) {
+    return <DefaultSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-white-100">
+        <p className="text-gray-700 text-lg">Error al cargar los datos. Por favor, inténtelo más tarde.</p>
+        <img src={ambu} className="imgAm" />
       </div>
-    </>
+    );
+  }
+
+  const handleSolicitarClick = (servicio) => {
+    if (servicio.servicio === 'Eventos' || servicio.servicio === 'Traslados') {
+      if (isAuthenticated) {
+        navigate('/ContratacionAmbulancias');
+      } else {
+        message.warning({
+          content: 'Para Solicitar el servicio inicie sesión en su cuenta.',
+          duration: 2,
+          style: {
+            marginTop: '70px',
+            marginRight: '-960px',
+          },
+        });
+        navigate('/login');
+      }
+    } else {
+      navigate('/citas');
+    }
+  };
+
+  return (
+    <div className="container mx-auto px-4">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto mt-8 max-w-2xl sm:text-center">
+          <h3 className="tracking-tight text-gray-900 sm:text-4xl">Servicios que ofrece la Cruz Roja Huejutla</h3>
+          <p className="mt-8 text-[13px] leading-6 text-gray-600">
+            Nuestro compromiso en la Cruz Roja es brindar un cuidado integral y humano, asegurando que cada paciente
+            reciba un tratamiento personalizado acorde a sus necesidades. Nos dedicamos a promover
+            la salud y el bienestar de nuestra comunidad, ofreciendo servicios de alta calidad y
+            accesibles para todos.
+          </p>
+        </div>
+        <div className="filtros flex justify-end mb-4">
+          <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-4">
+            <Input
+              placeholder="Ingrese su búsqueda"
+              value={search}
+              onChange={(e) => searcher(e.target.value)}
+              className="lg:w-1/3"
+              prefix={<SearchOutlined />}
+              style={{ height: '32px', borderRadius: '4px', width: '250px' }}
+            />
+
+            <Select
+              placeholder="Filtrar por Servicios"
+              value={filterServicios}
+              onChange={setFilterServicios}
+              className="lg:w-1/3"
+              style={{ height: '32px', borderRadius: '4px', width: '170px' }}
+            >
+              <Option value="">Servicios</Option>
+              {Array.from(new Set(tiposServicio.map((item) => item.servicio))).map((servicio) => (
+                <Option key={servicio} value={servicio}>
+                  {servicio}
+                </Option>
+              ))}
+            </Select>
+
+            <Select
+              placeholder="Filtrar por Costos"
+              value={filterCostos}
+              onChange={setFilterCostos}
+              className="lg:w-1/3"
+              style={{ height: '32px', borderRadius: '4px', width: '170px' }}
+            >
+              <Option value="">Costos</Option>
+              {costRanges.map((range) => (
+                <Option key={range.label} value={range.label}>
+                  {range.label}
+                </Option>
+              ))}
+            </Select>
+          </div>
+        </div>
+
+        {filteredData.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-screen bg-white-100">
+            <p className="text-gray-700 text-lg">No se encontraron resultados</p> <br />
+            <img src={ser} className="imgAm" />
+          </div>
+        ) : (
+          <div className="bg-white serv mt-8">
+            {filteredData.map((servicio) => (
+              <div key={servicio.id} className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+                <div className="p-8 sm:p-10 lg:flex-auto">
+                  <h3 className="text-3xl tracking-tight text-gray-900">{servicio.servicio}</h3>
+                  <p className="mt-6 text-[13px] leading-7 text-gray-600">
+                    {servicio.descripcion}
+                  </p>
+                  <div className="mt-10 flex items-center gap-x-4">
+                    <h4 className="flex-none text-[18px] font-semibold leading-6 text-red-600">Indicaciones</h4>
+                    <div className="h-px flex-auto bg-gray-100" />
+                  </div>
+                  <ul role="list" className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6">
+                    <li className="flex gap-x-3 text-[13px]">
+                      <CheckIcon aria-hidden="true" className="h-8 w-6 flex-none text-green-500" />
+                      {servicio.indicaciones}
+                    </li>
+                  </ul>
+                </div>
+                <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
+                  <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
+                    <div className="mx-auto max-w-xs px-8">
+                      <p className="text-[13px] font-semibold text-gray-600">
+                        {servicio.servicio === 'Eventos' || servicio.servicio === 'Traslados'
+                          ? 'Para estos servicios, necesitamos que realices el proceso de contratación. El precio se proporcionará después de la validación de su servicio, se le estará informando mediante un correo.'
+                          : 'Obtén el servicio ahora mismo'}
+                      </p>
+                      {servicio.servicio !== 'Eventos' && servicio.servicio !== 'Traslados' && (
+                        <>
+                          <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                            <span className="text-5xl tracking-tight text-gray-900">${servicio.costos}</span>
+                            <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">MXN</span>
+                          </p>
+                        </>
+                      )}
+                      <button
+                        onClick={() => handleSolicitarClick(servicio)}
+                        className="mt-10 block w-full rounded-md bg-red-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                      >
+                        Solicitar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

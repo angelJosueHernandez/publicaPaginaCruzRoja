@@ -46,16 +46,16 @@ export const generateDate = (
 };
 
 export const months = [
-	"Enero",
-	"Febrero",
-	"Marzo",
-	"Abril",
-	"Mayo",
-	"Junio",
-	"Julio",
-	"Agosto",
-	"Septiembre",
-	"Octubre",
-	"Noviembre",
-	"Diciembre",
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December",
 ];

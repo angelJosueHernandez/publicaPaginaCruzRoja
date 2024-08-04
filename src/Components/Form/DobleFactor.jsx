@@ -15,11 +15,13 @@ import './DobleFactor.css';
 import { Button, Space, notification } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined, InfoCircleOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import OtpInput from '../InputOTP/Otp';
-
+import Cookies from 'js-cookie';
 
 export default function Doblefactor() {
 
 
+  const { setIsAuthenticated, correoGuardar, setCorreoCookieUser, setIdCookieUser, setNombreCookieUser } = useAuth();
+ 
   //------------INPUT OTP--------------
 
   const length = 6; // Longitud predeterminada del OTP
@@ -122,9 +124,8 @@ useEffect(() => {
 
   //////////////////////////----------------------------
 
-  const { setIsAuthenticated, correoGuardar } = useAuth();
 
-  function getCookie(name) {
+  function  getCookie(name) {
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
         const cookie = cookies[i].trim();
@@ -137,6 +138,8 @@ useEffect(() => {
     // Si no se encuentra la cookie, retorna null
     return null;
 }
+
+
 
 const correo = correoGuardar;
 const [spinning, setSpinning] = React.useState(false);
@@ -180,7 +183,7 @@ const showLoader = () => {
         tokenUsuario: tokenUser
       };
   
-      fetch(`https://apicruzroja.onrender.com/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
+      fetch(`http://localhost:3000/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -191,16 +194,22 @@ const showLoader = () => {
         .then(response => response.json())
         .then(result => {
           if (result.mensaje === "El token de verificación es válido") {
-            const token = getCookie('jwt');
 
+            const token = Cookies.get('jwt');
+            
+           //const token = Cookies.get('jwt');
             let nombre; // Declarar la variable fuera de try
-            let Authenticated
+            let Authenticated;
+            let id;
+            let correo;
             if (token) {
               try {
                 // Decodifica el token JWT
                 const decodedToken = jwtDecode(token);
-                nombre = decodedToken.nombre;
+                nombre = decodedToken.nombre
                 Authenticated =decodedToken.IsAuthenticated 
+                correo = decodedToken.correo
+                id = decodedToken.id
               } catch (error) {
                 console.error('Error al decodificar el token JWT:', error);
                 // Maneja el error según sea necesario
@@ -220,6 +229,9 @@ const showLoader = () => {
               }
               navigate('/');
               setIsAuthenticated(Authenticated);
+              setCorreoCookieUser(correo);
+              setIdCookieUser(id);
+              setNombreCookieUser(nombre);
             }, 2000);
             
           }  else if (result.mensaje === "El token de verificación es inválido") {
@@ -300,7 +312,7 @@ const showLoader = () => {
       setHasExpiredOnce(true); // Marcar que ha expirado una vez
 
       // Llamar a la ruta para actualizar el token solo si remainingTime llega a 0
-      fetch("https://apicruzroja.onrender.com/actualizarToken", {
+      fetch("/actualizarToken", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -329,7 +341,7 @@ const showLoader = () => {
     };
   
     fetch(
-      `https://apicruzroja.onrender.com/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
+      `http://localhost:3000/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
       {
         method: "POST",
         headers: {
@@ -396,8 +408,8 @@ const showLoader = () => {
           <div className='cont-remen'>
             <ReCAPTCHA
               ref={captcha}
-              sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
-              //sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
+              //sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
+              sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
               onChange={handleChangeCaptcha}
             />
           </div>
