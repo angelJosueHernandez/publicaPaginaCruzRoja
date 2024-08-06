@@ -195,7 +195,7 @@ const showLoader = () => {
         .then(result => {
           if (result.mensaje === "El token de verificación es válido") {
 
-            const token = Cookies.get('jwt');
+          /**   const token = Cookies.get('jwt');
             
            //const token = Cookies.get('jwt');
             let nombre; // Declarar la variable fuera de try
@@ -210,6 +210,23 @@ const showLoader = () => {
                 Authenticated =decodedToken.IsAuthenticated 
                 correo = decodedToken.correo
                 id = decodedToken.id
+ */
+
+                const token = result.token;
+                Cookies.set('jwt', token, { secure: true, sameSite: 'None' });
+          
+                let nombre;
+                let Authenticated;
+                let id;
+                let correo;
+               
+                if (token) {
+                  try {
+                    const decodedToken = jwtDecode(token);
+                    nombre = decodedToken.nombre;
+                    Authenticated = decodedToken.IsAuthenticated;
+                    correo = decodedToken.correo;
+                    id = decodedToken.id;
               } catch (error) {
                 console.error('Error al decodificar el token JWT:', error);
                 // Maneja el error según sea necesario
@@ -253,7 +270,7 @@ const showLoader = () => {
       message.warning('Favor de Rectificar sus datos');
     }
   };
-  
+    
  
   const validateToken = (tokenUser) => {
     if (tokenUser === '') {
