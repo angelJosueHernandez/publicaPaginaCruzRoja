@@ -29,7 +29,7 @@ import AuthRoute from './AuthRoute'; // Importa el nuevo componente AuthRoute
 import { DefaultSkeleton } from '../Pages/Servicios/DefaultSkeleton';
 
 export default function Router() {
-  const { loading } = useAuth(); // Asegúrate de que la ruta del contexto sea correcta
+  const { loading, isAuthenticated } = useAuth(); // Asegúrate de que la ruta del contexto sea correcta
 
   const [showCookieBanner, setShowCookieBanner] = useState(false);
 
@@ -70,16 +70,15 @@ export default function Router() {
         <Route path="Donaciones" element={<Donaciones />} />
 
         {/* Rutas protegidas */}
-        <Route element={<ProtectorRutas />}>
+        <Route element={<ProtectorRutas user={isAuthenticated} />}>
           <Route path="Perfil" element={<Perfil />} />
           <Route path="ContratacionAmbulancias" element={<ContratacionAmbulancias />} />
         </Route>
 
-        {/* Rutas de autenticación */}
-        <Route element={<AuthRoute />}>
+        
           <Route path="Login" element={<Login />} />
           <Route path="Registro" element={<Registrer />} />
-        </Route>
+ 
 
         {/* Ruta para cualquier otro caso */}
         <Route path="*" element={<NotFound />} />
