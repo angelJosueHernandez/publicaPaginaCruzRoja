@@ -44,14 +44,14 @@ export default function ContratacionForm() {
   const [ambulanciaSeleccionadaError, setAmbulanciaSeleccionadaError] = useState(''); 
 
   useEffect(() => {
-    fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/tipoContratacion')
+    fetch('https://api-beta-mocha-59.vercel.app/tipoContratacion')
       .then(response => response.json())
       .then(data => setTipoContratacionOptions(data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   useEffect(() => {
-    fetch(`https://api-git-main-ah5318740gmailcoms-projects.vercel.app/usuario/${correoCookieUser}`)
+    fetch(`https://api-beta-mocha-59.vercel.app/usuario/${correoCookieUser}`)
       .then(response => response.json())
       .then(data => {
         setNombre(data.nombre);
@@ -62,7 +62,7 @@ export default function ContratacionForm() {
   }, [correoCookieUser]);
 
   useEffect(() => {
-    fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/ambulancias-disponibles')
+    fetch('https://api-beta-mocha-59.vercel.app/ambulancias-disponibles')
       .then(response => response.json())
       .then(data => {
         if (data.length > 0) {
@@ -240,7 +240,7 @@ export default function ContratacionForm() {
     };
 
     try {
-      const response = await fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/CrearContratacion', {
+      const response = await fetch('https://api-beta-mocha-59.vercel.app/CrearContratacion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -253,7 +253,7 @@ export default function ContratacionForm() {
         throw new Error(data.msg || 'Error en la solicitud');
       }
 
-      await fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/enviar-correo-contratacion', {
+      await fetch('https://api-beta-mocha-59.vercel.app/enviar-correo-contratacion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

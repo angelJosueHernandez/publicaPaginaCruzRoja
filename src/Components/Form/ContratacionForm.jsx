@@ -22,7 +22,7 @@ export default function ContratacionForm() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/tipoContratacion')
+    fetch('https://api-beta-mocha-59.vercel.app/tipoContratacion')
       .then(response => response.json())
       .then(data => setTipoContratacionOptions(data))
       .catch(error => console.error('Error fetching data:', error));
@@ -54,7 +54,7 @@ export default function ContratacionForm() {
 
     console.log('Enviando datos:', requestBody); // Depuración
 
-    fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/CrearContratacionSinRegistrar', {
+    fetch('https://api-beta-mocha-59.vercel.app/CrearContratacionSinRegistrar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
