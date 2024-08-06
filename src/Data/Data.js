@@ -72,7 +72,7 @@ export const authLinks = [
           id: 1,
           icon: FiUser,  
           link: 'Login',
-          name: 'LOGIN'
+          name: 'Login'
       },
       {
           id: 2,
