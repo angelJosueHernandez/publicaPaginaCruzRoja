@@ -138,7 +138,7 @@ const Servicios = () => {
             marginRight: '-960px',
           },
         });
-        navigate('/login');
+        navigate('/Login');
       }
     } else {
       navigate('/citas');
