@@ -71,7 +71,7 @@ export default function Nav() {
       const token = Cookies.get('jwt');
       if (token) {
         try {
-          fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {
+          fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/verifyToken', {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

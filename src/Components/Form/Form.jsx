@@ -64,7 +64,7 @@ export default function Form() {
         contraseña: password
       };
   
-      fetch("https://api-beta-mocha-59.vercel.app/user/authenticate", {
+      fetch("https://api-git-main-ah5318740gmailcoms-projects.vercel.app/user/authenticate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -128,7 +128,7 @@ export default function Form() {
     };
   
     fetch(
-      `https://api-beta-mocha-59.vercel.app/userCuenta/${encodeURIComponent(email)}`,
+      `https://api-git-main-ah5318740gmailcoms-projects.vercel.app/userCuenta/${encodeURIComponent(email)}`,
       {
         method: "PUT",
         headers: {
@@ -156,7 +156,7 @@ export default function Form() {
     };
   
     fetch(
-      `https://api-beta-mocha-59.vercel.app/enviarverificacionCorreo/${encodeURIComponent(email)}`,
+      `https://api-git-main-ah5318740gmailcoms-projects.vercel.app/enviarverificacionCorreo/${encodeURIComponent(email)}`,
       {
         method: "POST",
         headers: {
@@ -233,7 +233,7 @@ export default function Form() {
       correo: correo
     };
   
-    fetch("https://api-beta-mocha-59.vercel.app/notiCorreoCuentaBloqueada/" + encodeURIComponent(correo), {
+    fetch("https://api-git-main-ah5318740gmailcoms-projects.vercel.app/notiCorreoCuentaBloqueada/" + encodeURIComponent(correo), {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

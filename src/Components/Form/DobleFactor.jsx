@@ -183,7 +183,7 @@ const showLoader = () => {
         tokenUsuario: tokenUser
       };
   
-      fetch(`https://api-beta-mocha-59.vercel.app/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
+      fetch(`https://api-git-main-ah5318740gmailcoms-projects.vercel.app/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -341,7 +341,7 @@ const showLoader = () => {
     };
   
     fetch(
-      `https://api-beta-mocha-59.vercel.app/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
+      `https://api-git-main-ah5318740gmailcoms-projects.vercel.app/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
       {
         method: "POST",
         headers: {

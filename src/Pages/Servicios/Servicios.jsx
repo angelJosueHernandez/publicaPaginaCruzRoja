@@ -58,7 +58,7 @@ const Servicios = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api-beta-mocha-59.vercel.app/tiposServicio', {
+        const response = await fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/tiposServicio', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ const Servicios = () => {
     const token = Cookies.get('jwt');
     if (token) {
       try {
-        fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {
+        fetch('https://api-git-main-ah5318740gmailcoms-projects.vercel.app/verifyToken', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

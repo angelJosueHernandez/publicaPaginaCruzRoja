@@ -217,7 +217,7 @@ const showLoader = () => {
       }
   
       fetch(
-        "https://api-beta-mocha-59.vercel.app/user/" + email,
+        "https://api-git-main-ah5318740gmailcoms-projects.vercel.app/user/" + email,
         {
           method: "POST",
           credentials: 'include',
@@ -235,7 +235,7 @@ const showLoader = () => {
           .then((valid) => {
             if (valid) {
               fetch(
-                "https://api-beta-mocha-59.vercel.app/user",
+                "https://api-git-main-ah5318740gmailcoms-projects.vercel.app/user",
                 {
                   method: "POST",
                   credentials: 'include',
