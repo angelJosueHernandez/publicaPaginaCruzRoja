@@ -22,7 +22,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../Components/Contexts/AuthContexts';
 import { DefaultSkeleton } from '../Pages/Servicios/DefaultSkeleton';
 
-const ProtectorRutas = ({user, children }) => {
+const ProtectorRutas = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
@@ -30,10 +30,11 @@ const ProtectorRutas = ({user, children }) => {
     return <DefaultSkeleton/>;
   }
 
-  if(isAuthenticated == false){
-    return <Navigate to='/Login' />
-}
-return children ? children: <Outlet/>
+  if (!isAuthenticated) {
+    return <Navigate to='/Login' />;
+  }
+
+  return children ? children : <Outlet />;
 };
 
 export default ProtectorRutas;
