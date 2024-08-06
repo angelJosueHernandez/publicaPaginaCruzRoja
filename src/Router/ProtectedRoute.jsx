@@ -30,7 +30,7 @@ const ProtectorRutas = ({user, children }) => {
     return <DefaultSkeleton/>;
   }
 
-  if(user == false){
+  if(isAuthenticated == false){
     return <Navigate to='/Login' />
 }
 return children ? children: <Outlet/>
