@@ -27,6 +27,9 @@ import Contenido from '../Components/ChatBot/Contenido/Contenido';
 import ProtectorRutas from './ProtectedRoute';
 import AuthRoute from './AuthRoute'; // Importa el nuevo componente AuthRoute
 import { DefaultSkeleton } from '../Pages/Servicios/DefaultSkeleton';
+import Conocenos from '../Pages/Conocenos/Conocenos';
+
+
 
 export default function Router() {
   const { loading } = useAuth(); // Asegúrate de que la ruta del contexto sea correcta
@@ -68,6 +71,7 @@ export default function Router() {
         <Route path="DobleFactor" element={<DobleFactor />} />
         <Route path="Citas" element={<Citas />} />
         <Route path="Donaciones" element={<Donaciones />} />
+        <Route path="Conocenos" element={<Conocenos/>} />
 
         {/* Rutas protegidas */}
         <Route element={<ProtectorRutas />}>

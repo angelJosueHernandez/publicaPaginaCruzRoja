@@ -401,11 +401,11 @@ export const authLinks = [
    export const lettestArticleData = [
     {
       id: 1,
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod metus in tortor fringilla, et commodo metus bibendum.',
+      title: 'Accidente de motocicleta en la calle principal. El conductor fue atendido por paramédicos y trasladado al hospital.',
       image: ArticleImage1,
       titLink: "#",
-      date: '2 aug, 2021',
-      inspiration: 'Ultimas Noticias', 
+      date: '2 ago, 2024',
+      inspiration: 'Últimas Noticias',
       fbLink: "*",
       instLink: "*",
       twitaLink: "*",
@@ -413,10 +413,10 @@ export const authLinks = [
     {
       id: 2,
       image: ArticleImage2,
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod metus in tortor fringilla, et commodo metus bibendum.',
+      title: 'Equipo de emergencia atiende a paciente sospechoso de COVID-19. Se tomaron todas las medidas de seguridad.',
       titleLink: "*",
-      date: '2 aug, 2021',
-      inspiration: 'Ultimas Noticias', 
+      date: '2 ago, 2024',
+      inspiration: 'Últimas Noticias',
       fbLink: "*",
       instLink: "*",
       twitaLink: "*",
@@ -424,15 +424,16 @@ export const authLinks = [
     {
       id: 3,
       image: ArticleImage3,
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod metus in tortor fringilla, et commodo metus bibendum.',
+      title: 'Atención a persona lesionada en la vía pública. Los paramédicos brindaron primeros auxilios en el lugar.',
       titleLink: "*",
-      date: '2 aug, 2021',
-      inspiration: 'Ultimas Noticias', 
+      date: '2 ago, 2024',
+      inspiration: 'Últimas Noticias',
       fbLink: "*",
       instLink: "*",
       twitaLink: "*",
     },
-   ];
+  ];
+  
   
    
   

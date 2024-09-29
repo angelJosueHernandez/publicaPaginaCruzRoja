@@ -47,11 +47,14 @@ export default function LstestArticle() {
                 }
                 )}
             </div>
-            <center>
+           {/**
+            * 
+            *   <center>
             <Link to={'*'} className='btn btn-border'>
                 Leer mas
             <BsArrowReturnRight/></Link>
             </center>
+            */}
             
         </div>
        

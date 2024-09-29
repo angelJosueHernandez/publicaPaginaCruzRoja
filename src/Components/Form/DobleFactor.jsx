@@ -183,7 +183,7 @@ const showLoader = () => {
         tokenUsuario: tokenUser
       };
   
-      fetch(`https://api-beta-mocha-59.vercel.app/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
+      fetch(`http://localhost:3000/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -358,7 +358,7 @@ const showLoader = () => {
     };
   
     fetch(
-      `https://api-beta-mocha-59.vercel.app/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
+      `http://localhost:3000/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
       {
         method: "POST",
         headers: {
@@ -425,8 +425,8 @@ const showLoader = () => {
           <div className='cont-remen'>
             <ReCAPTCHA
               ref={captcha}
-              //sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
-              sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
+              //sitekey=6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf
+             sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
               onChange={handleChangeCaptcha}
             />
           </div>

@@ -33,8 +33,8 @@ export default function Home() {
    {/*
     <BestSellingBook/>
   <PopularBooks/>
- */}
-    <Blog/>
+ 
+    <Blog/>*/}
    <VideoY/>
     <LstestArticle/>
     </>

@@ -90,7 +90,7 @@ const handleClick = async (direction) => {
       }else{
         /// enviando el mensaje 
         message.loading('Verficando...',1);
-  fetch(`https://api-beta-mocha-59.vercel.app/recuperacionCorreo/${encodeURIComponent(correo)}`, {
+  fetch(`http://localhost:3000/recuperacionCorreo/${encodeURIComponent(correo)}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -128,7 +128,7 @@ const handleClick = async (direction) => {
           return;
         }else{
           message.loading('Verficando...', 1);
-            fetch('https://api-beta-mocha-59.vercel.app/recuperacionSMS', {
+            fetch('http://localhost:3000/recuperacionSMS', {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
@@ -184,7 +184,7 @@ const handleClick = async (direction) => {
         return;
       }else if (contraCo === true && contraCo2 === true ){
 
-        fetch(`https://api-beta-mocha-59.vercel.app/actualizarContraRecuperacion`, {
+        fetch(`http://localhost:3000/actualizarContraRecuperacion`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json"
@@ -245,7 +245,7 @@ const verifyToken = async () => {
       tokenUsuario: token
     };
     try {
-      const response = await fetch(`https://api-beta-mocha-59.vercel.app/compararToken/${encodeURIComponent(correo)}`, {
+      const response = await fetch(`http://localhost:3000/compararToken/${encodeURIComponent(correo)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

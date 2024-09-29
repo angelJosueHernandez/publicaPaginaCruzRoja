@@ -2,6 +2,10 @@ import React from 'react';
 import { DefaultSkeleton } from '../Servicios/DefaultSkeleton';
 import { useAuth } from '../../Components/Contexts/AuthContexts';
 import { Navigate } from 'react-router-dom';
+import TableContratacion from '../../Components/Tables/TableContratacion';
+import TableCitas from '../../Components/Tables/TableCitas';
+import TablePerfil from '../../Components/Tables/TablePerfil';
+import './Perfil.css'
 
 export default function Perfil() {
   const { isAuthenticated, loading, user, avatarColor } = useAuth();
@@ -16,10 +20,11 @@ export default function Perfil() {
 
   return (
     <div>
-      <h1>Perfil Privado</h1>
-      <div style={{ backgroundColor: avatarColor, width: '50px', height: '50px', borderRadius: '50%' }}></div>
-      <p>Username: {user}</p>
-      {/* Aquí puedes mostrar más detalles del perfil si es necesario */}
+      <div className='contenedorPerfil'>
+        <TablePerfil/>
+        <TableCitas/>
+        <TableContratacion/>
+      </div>
     </div>
   );
 }
