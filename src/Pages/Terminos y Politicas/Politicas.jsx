@@ -30,7 +30,7 @@ export default function Politicas() {
             <p className="mb-4">
                 Los datos personales que recabamos de usted, los utilizaremos para las siguientes finalidades que son necesarias para el servicio que solicita:
             </p>
-            <ul className="list-disc pl-6 mb-6">
+            <ul className="  text-[13px] leading-loose">
                 <li>Facturación y cobranza por servicios.</li>
                 <li>Mantenimiento de registros para seguimiento a servicios.</li>
                 <li>Estudios, registros, estadísticas y análisis de información de salud.</li>
@@ -44,7 +44,7 @@ export default function Politicas() {
             <p className="mb-4">
                 De manera adicional, utilizaremos su información personal para las siguientes finalidades secundarias que no son necesarias para el servicio solicitado, pero que nos permiten y facilitan brindarle una mejor atención:
             </p>
-            <ul className="list-disc pl-6 mb-6">
+            <ul className="text-[13px] leading-loose">
                 <li>Análisis estadísticos y de mercado.</li>
                 <li>Requerimiento de cualquier autoridad gubernamental y demás que las leyes, normas y reglamentos que así lo establezcan.</li>
                 <li>Prestación de servicios médico-hospitalarios, hospitalización, cirugía, atención de enfermería, servicios farmacéuticos, análisis de laboratorio radiología e imagen, estudios y análisis patológicos, terapia, rehabilitación.</li>
@@ -93,7 +93,7 @@ export default function Politicas() {
             <p className="mb-4">
                 Además de los datos personales mencionados anteriormente, para las finalidades informadas en el presente aviso de privacidad utilizaremos los siguientes datos personales considerados como sensibles, que requieren de especial protección:
             </p>
-            <ul className="list-disc pl-6 mb-6">
+            <ul className="text-[13px] leading-loose">
                 <li>Estado de salud físico presente, pasado o futuro</li>
                 <li>Estado de salud mental presente, pasado o futuro</li>
                 <li>Información genética</li>
