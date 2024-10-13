@@ -17,7 +17,7 @@ export default function LstestArticle() {
   return (
     <section className='latestArticle'>
         <div className="continer latest-article-container">
-            <TitleTypeOne Title={'Enterate de Todo'} TitleTop={'Nuestras Noticias'}/>
+            <TitleTypeOne Title={'Enterate de Todo'} TitleTop={'NUESTRAS NOTICIAS'}/>
             <div className="latest-article-content">
                 {
                 lettestArticleData.map(({titLink, title, date, instLink,
