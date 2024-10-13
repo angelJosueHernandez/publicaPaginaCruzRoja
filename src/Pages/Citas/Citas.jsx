@@ -4,6 +4,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './custom-calendar.css';
+import './Citas.css'
 import { useAuth } from '../../Components/Contexts/AuthContexts';
 import {jwtDecode} from 'jwt-decode';
 import Cookies from 'js-cookie';
@@ -288,21 +289,21 @@ export default function Citas() {
 
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center space-y-8 lg:space-y-0 lg:space-x-8 mt-5 px-4 lg:px-0">
-      <div className="w-full lg:w-auto">
+      <div className="w-full lg:w-auto  calendario">
         <CustomCalendar onChange={handleDateChange} value={selectedDate} />
       </div>
       <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-2xl">
         <h2 className="text-[50px] text-red-700 text-center mb-6">Sacar Cita</h2>
         <div className="text-[12px] text-red-800 mb-4 text-center">
        
-         <strong>Las citas deben sacarse con al menos un día de anticipación.</strong> 
+        Las citas deben sacarse con al menos un día de anticipación.
         </div>
         <div className="text-[12px] text-red-800 mb-4 text-center">
-         <strong>Para sacar una cita necesita Iniciar Sesion en su cuenta</strong> 
+        Para sacar una cita necesita <strong> Iniciar Sesion en su cuenta</strong> 
         </div>
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-wrap lg:flex-nowrap justify-between space-y-4 lg:space-y-0 lg:space-x-4">
-            <div className="w-full lg:w-1/3">
+            <div className="w-[9rem] lg:w-1/3">
               <label className="block text-gray-700 text-sm">Nombre</label>
               <input
                 type="text"
@@ -317,8 +318,9 @@ export default function Citas() {
                 {errors.nombre && touchedFields.nombre && <div className="text-red-500 text-[11px] mt-1">{errors.nombre}</div>}
               </div>
             </div>
-            <div className="w-full lg:w-1/3">
-              <label className="block text-gray-700 text-sm">Apellido Paterno</label>
+          
+           <div className="w-[9rem] margin lg:w-1/3">
+              <label className="block  text-gray-700 text-sm">Apellido Paterno</label>
               <input
                 type="text"
                 name="apellidoPaterno"
@@ -332,7 +334,8 @@ export default function Citas() {
                 {errors.apellidoPaterno && touchedFields.apellidoPaterno && <div className="text-red-500 text-[11px] mt-1">{errors.apellidoPaterno}</div>}
               </div>
             </div>
-            <div className="w-full lg:w-1/3">
+           
+            <div className="w-[9rem] lg:w-1/3">
               <label className="block text-gray-700 text-sm">Apellido Materno</label>
               <input
                 type="text"
@@ -341,7 +344,7 @@ export default function Citas() {
                 value={formData.apellidoMaterno}
                 onChange={handleInputChange}
                 readOnly
-                className={`w-full px-2 py-1 mt-1 border rounded-md focus:outline-none focus:ring-none focus:ring-none text-[12px] h-[33px] ${errors.apellidoMaterno && touchedFields.apellidoMaterno ? 'border-red-500' : ''}`}
+                className={`w-full px-2  py-1 mt-1 border rounded-md focus:outline-none focus:ring-none focus:ring-none text-[12px] h-[33px] ${errors.apellidoMaterno && touchedFields.apellidoMaterno ? 'border-red-500' : ''}`}
               />
               <div className="h-4">
                 {errors.apellidoMaterno && touchedFields.apellidoMaterno && <div className="text-red-500 text-[11px] mt-1">{errors.apellidoMaterno}</div>}
@@ -349,7 +352,7 @@ export default function Citas() {
             </div>
           </div>
           <div className="flex flex-wrap lg:flex-nowrap justify-between items-center space-y-4 lg:space-y-0 lg:space-x-4">
-            <div className="w-full lg:w-2/3">
+            <div className="w-[15rem] lg:w-2/3">
               <label className="block text-gray-700 text-sm">Correo</label>
               <input
                 type="email"
@@ -364,7 +367,7 @@ export default function Citas() {
                 {errors.correo && touchedFields.correo && <p className="text-red-500 text-xs mt-1">{errors.correo}</p>}
               </div>
             </div>
-            <div className="w-full lg:w-1/3">
+            <div className="w-[7.8rem] lg:w-1/3">
               <label className="block text-gray-700 text-sm">Fecha</label>
               <input
                 type="date"
@@ -377,10 +380,10 @@ export default function Citas() {
                 {errors.fecha && touchedFields.fecha && <div className="text-red-500 text-[11px] mt-1">{errors.fecha}</div>}
               </div>
             </div>
-            <div className="w-full lg:w-1/3">
-              <label className="block text-gray-700 text-sm">Horarios Disponibles</label>
+            <div className="w-[11rem]  lg:w-1/3">
+              <label className="block  text-gray-700 text-sm">Horarios Disponibles</label>
               <Listbox value={selectedHorario} onChange={setSelectedHorario} disabled={!availableHorarios.length}>
-                <div className="relative mt-1">
+                <div className="relative mt-2 mb-3">
                   <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1 pl-2 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-600 sm:text-sm h-[33px] flex items-center justify-between">
                     <span className="block truncate">{selectedHorario ? selectedHorario.name : 'Seleccione un horario'}</span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

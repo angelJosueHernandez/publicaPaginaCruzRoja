@@ -63,3 +63,33 @@
         margin: 0 0.25rem; /* Reduce el margen entre los botones de navegación en pantallas pequeñas */
     }
 }
+
+
+@media (max-width: 890px) {
+    .calendario{
+        align-items: center;
+    }
+    .calendar-container {
+        max-width: 70%; /* Asegura que el calendario ocupe todo el ancho en pantallas pequeñas */
+     margin-left: 125px;
+    }
+
+    .react-calendar__tile {
+        height: 60px; /* Reduce la altura de los tiles en pantallas pequeñas */
+    }
+
+    .react-calendar__navigation button {
+        font-size: 1.2rem; /* Reduce el tamaño de los botones de navegación en pantallas pequeñas */
+        margin: 0 0.25rem; /* Reduce el margen entre los botones de navegación en pantallas pequeñas */
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .calendar-container {
+        max-width: 100%; 
+        margin-left:0px;
+    }
+   
+}
