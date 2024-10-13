@@ -33,7 +33,7 @@ export default function PoliCokkies() {
                 Esta Política de cookies explica cómo [Tu Empresa] y sus afiliados (colectivamente "nosotros", "nos" y "nuestro"), utilizamos cookies y tecnologías similares para reconocerlo cuando visita nuestra aplicación. Explica qué son estas tecnologías y por qué las utilizamos, así como las opciones sobre cómo controlarlos.
             </p>
 
-            <h3 className="text-2xl  text-red-600 mb-4">¿Qué es una cookie?</h3>
+            <h2 className="text-2xl  text-red-600 mb-4">¿Qué es una cookie?</h2>
             <p className="text-[13px] mb-6">
                 Una cookie es un pequeño archivo de texto que se almacena en su computadora u otro dispositivo conectado a Internet para identificar su navegador, proporcionar análisis, recordar información sobre usted, como su preferencia de idioma o información de inicio de sesión. Son completamente seguros y no se pueden usar para correr programas o enviar virus a su dispositivo.
             </p>
