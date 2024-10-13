@@ -104,7 +104,7 @@ export default function Politicas() {
                 Con relación a las transferencias que requieren de su consentimiento, si usted a continuación no manifiesta su negativa para que estas ocurran, entenderemos que nos lo ha otorgado:
             </p>
 
-            <h3 className="text-2xl  text-red-600 mb-4">¿Cómo puede acceder, rectificar o cancelar sus datos personales, u oponerse a su uso?</h3>
+            <h2 className="text-2xl  text-red-600 mb-4">¿Cómo puede acceder, rectificar o cancelar sus datos personales, u oponerse a su uso?</h2>
             <p className="text-[13px] mb-4">
                 Usted tiene derecho a conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal en caso de que esté desactualizada, sea inexacta o incompleta (Rectificación); que la eliminemos de nuestros registros o bases de datos cuando considere que la misma no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición).
             </p>
