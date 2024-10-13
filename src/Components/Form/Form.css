@@ -194,11 +194,219 @@
   margin-top: -6.5px !important ;  
   color: red !important;
 }
-
+.erroresInicio{
+    margin: 12px;
+    margin-bottom: 16px !important;
+}
 .leading{
     margin-bottom: -7px !important;
     margin-top: 4.5px !important ; 
 }
+.olvidaste{
+    margin-top: 12px;
+  }
+.InputsCon{
+    margin-top: 13px;
+}
 
 
+@media (max-width: 450px) {
+    /* Para pantallas de celulares */
+    .form-container{
+    margin-top: -60px !important;
+    }
+    .container2 {
+      width: 90% !important;
+      height: 400px !important;
+      margin: 30px !important; /* Centrar el contenedor */
+      padding: 20px !important;
+      text-align: center !important; /* Centrar el texto */
+    }
+  
+    .titulo {
+      margin-top: 110px !important;
+      margin-left: 160px;
+      white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+  text-overflow: ellipsis;
+    }
+  .span{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 150px;
+  }
 
+  
+    /* Ocultar la imagen de la chica */
+    .img-Login {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  
+    .img-Login4 {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+  
+    /* Centrar el botón de Google */
+    
+  .logoGogle{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 180px;
+  }
+  .InputsCon{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 10px !important;
+  }
+  .InputsCon2{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 0px !important;
+  }
+    /* Centrar el botón de inicio de sesión */
+    .button2 {
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+        text-overflow: ellipsis;
+        margin-left: 175px;
+    margin-bottom: 13px;
+    }
+  .olvidaste{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 180px;
+    margin-bottom: 23px;
+  }
+    /* Asegurar que el captcha se alinee bien */
+    .cont-remen {
+      display: flex !important;
+      justify-content: center !important;
+      margin-left: 180px  !important;
+    }
+
+    /* Centrar el texto de cuenta y registro */
+    .cont-remen2 {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      margin-left: 180px !important;
+    }
+  
+ 
+    .feature-border{
+        display: none !important;
+        opacity: 0 !important;
+    }
+    .cuenta2{
+      
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+   
+    }
+    .contrasena{
+        margin-left: 40px !important;
+        width: 190px !important;
+    }
+    .correo{
+        margin-left: 40px !important;
+        width: 190px !important;
+    }
+    .contra{
+        margin-left: 23px;
+    }
+  }
+  
+
+  
+
+@media (max-width: 360px) {
+    /* Para pantallas de celulares */
+    .form-container{
+    margin-top: -50px !important;
+    }
+    .container2 {
+      width: 90% !important;
+      height: 400px !important;
+      margin: 30px !important; /* Centrar el contenedor */
+      padding: 20px !important;
+      text-align: center !important; /* Centrar el texto */
+    }
+  
+    .titulo {
+      margin-top: 110px !important;
+      margin-left: 160px;
+      white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+  text-overflow: ellipsis;
+    }
+    .span{
+        margin-top: 23px;
+    }
+ 
+    .social-icons {
+      margin: 30px 0 !important;
+      display: flex !important; /* Asegurarse de que los íconos estén en línea */
+      justify-content: center !important; /* Centrar los íconos */
+    }
+  
+    .social-icons a {
+      border: 1px solid #ccc !important;
+      border-radius: 20% !important;
+      display: inline-flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin: 0 3px !important;
+      width: 20px !important;
+      height: 20px !important;
+    }
+  
+    /* Ocultar la imagen de la chica */
+    .img-Login {
+      display: none !important;
+    }
+  
+    .img-Login4 {
+      display: none !important;
+    }
+  
+    /* Centrar el botón de Google */
+    .btn-google {
+      display: block !important;
+      margin: 0 auto !important;
+    }
+  
+    /* Centrar el botón de inicio de sesión */
+    .button2 {
+      display: block !important;
+      margin: 0 auto !important;
+    }
+  
+    /* Asegurar que el captcha se alinee bien */
+    .cont-remen{
+        width: 90% !important; /* Ajusta el ancho que desees */
+        transform: scale(0.8) !important; /* Cambia el valor de scale según el tamaño deseado, por ejemplo 0.8 = 80% del tamaño original */
+        transform-origin: 0 0 !important;
+    }
+
+    /* Centrar el texto de cuenta y registro */
+    .cont-remen2 {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+  
+ 
+    .feature-border{
+        display: none !important;
+    }
+  }
+  

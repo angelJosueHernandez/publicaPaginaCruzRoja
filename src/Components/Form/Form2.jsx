@@ -476,21 +476,8 @@ const showLoader = () => {
     
           <div className="form-container sign-in">
             <form onSubmit={handleSubmit}>
-              <h2 className='title-form'>Resgistro</h2>
-              <span>Registrate Con Diferentes Plataformas</span>
-    
-              <div className="social-icons">
-                
-                <a href="#" className="icon">
-                  <i className="fa-brands fa-facebook-f"><FaFacebookF /></i>
-                </a>
-                <a href="#" className="icon">
-                  <i className="fa-brands fa-github"><FaGithub /></i>
-                </a>
-                <a href="#" className="icon">
-                  <i className="fa-brands fa-linkedin-in"><FaLinkedinIn /></i>
-                </a>
-              </div>
+              <h2 className='title-form'>Registro</h2>
+              
     
               <span>Rellene los Campos con sus datos reales</span>
           
@@ -541,26 +528,7 @@ const showLoader = () => {
     </div>
   </div>
   
-{/* 
-  <div className="sm:col-span-3 md:col-span-3 relative">
-  <label htmlFor="telefono" className="block text-sm font-medium leading-6 text-gray-900">Telefono</label>
-  <div className="mt-2">
-    <input  
-      type="tel"
-      id="telefono"
-      name="telefono"
-      value={telefono}
-      required
-      onChange={(e) => setTelefono(e.target.value)}
-      onBlur={() => validateTelefono(telefono)} // Aquí se llama a validateTelefono correctamente
-      className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${telefonoError ? 'input-error' : ''}`}
-    />
-  </div>
-  {telefonoError && (
-    <p className="error-message absolute -mt-6 sm:-mt-6 text-xs text-red-500 left-0">{telefonoError}</p>
-  )}
-</div>
-*/}
+
 
 <div className="sm:col-span-3 md:col-span-3 relative">
   <label htmlFor="telefono" className="block text-sm font-medium leading-6 text-gray-900">Telefono</label>

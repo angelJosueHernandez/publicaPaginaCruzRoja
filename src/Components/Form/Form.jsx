@@ -265,19 +265,11 @@ export default function Form() {
     <div className={containerClass} id="container">
       <div className="form-container sign-in">
         <form onSubmit={handleSubmit}>
-          <h3 className='title-form'>Inicio de Sesión</h3>
-          <div className="social-icons">
-            <a href="#" className="icon">
-              <i className="fa-brands fa-facebook-f"><FaFacebookF /></i>
-            </a>
-            <a href="#" className="icon">
-              <i className="fa-brands fa-github"><FaGithub /></i>
-            </a>
-            <a href="#" className="icon">
-              <i className="fa-brands fa-linkedin-in"><FaLinkedinIn /></i>
-            </a>
-          </div>
-          <span>Introduce tu Correo y Contraseña</span>
+          <div className='tituloScreen'>
+          <h3 className='title-form titulo'>Inicio de Sesión</h3></div>
+          
+          <span className='span'>Introduce tu Correo y Contraseña</span>
+         
           <div className="mt-1 grid grid-cols-1 gap-x-1gap-y-4 sm:grid-cols-6">
             <div className="sm:col-span-4">
               <label htmlFor="email" className="block text-sm font-medium leading text-gray-900">Correo</label>
@@ -291,18 +283,19 @@ export default function Form() {
                   required
                   type="email"
                   autoComplete="email"
-                  className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${emailError ? 'input-error' : ''}`} />
+                  className={`correo block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${emailError ? 'input-error' : ''}`} />
               </div>
+              <div className='InputsCon'>
               <div className="erroresInicio">
               {emailError && <p className="error-messageInicio absolute  left-30">{emailError}</p>}
               </div>
-
+              </div>
             </div>
           </div>
 
           <div className="mt-1 grid grid-cols-1 gap-x-1 gap-y-4 sm:grid-cols-6">
             <div className="sm:col-span-4">
-              <label htmlFor="email" className="block text-sm font-medium leading text-gray-900">Contraseña</label>
+              <label htmlFor="email" className="block text-sm font-medium contra leading text-gray-900">Contraseña</label>
               <div className="mt-3 relative rounded-md shadow-sm">
                 <input
                   id="password"
@@ -312,7 +305,7 @@ export default function Form() {
                   onBlur={() => validatePassword(password)}
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="password"
-                  className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${passwordError ? 'input-error' : ''}`} />
+                  className={`block w-full contrasena rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${passwordError ? 'input-error' : ''}`} />
                 <button
                   type="button"
                   className="absolute inset-y-0 flex items-center text-gray-400 focus:outline-none verBoton"
@@ -324,15 +317,15 @@ export default function Form() {
                   )}
                 </button>
               </div>
+              <div className='InputsCon2'>
              <div className="erroresInicio">
              {passwordError && (
                 <p className="error-messageInicio absolute  left-30">{passwordError}</p>
               )}
              </div>
-        
+             </div>
             </div>
           </div>
- 
  
           <div className='cont-remen'>
             <ReCAPTCHA
@@ -342,12 +335,15 @@ export default function Form() {
               onChange={handleChangeCaptcha}
             />
           </div>
+          <div className='olvidaste'>
           <Link to={'/Recuperacion'}>
             Olvidaste tu Contraseña?
           </Link>
+          </div>
           <button className='button2' type="submit" >Iniciar Sesión</button>
+          <div className='logoGogle'>
           <button type='button' onClick={google} className='flex items-center justify-center gap-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out transform py-4 rounded-xl text-gray-700 font-semibold text-lg border-2 border-gray-100 btn-google'>
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.26644 9.76453C6.19903 6.93863 8.85469 4.90909 12.0002 4.90909C13.6912 4.90909 15.2184 5.50909 16.4184 6.49091L19.9093 3C17.7821 1.14545 15.0548 0 12.0002 0C7.27031 0 3.19799 2.6983 1.24023 6.65002L5.26644 9.76453Z" fill="#EA4335"/>
                                 <path d="M16.0406 18.0142C14.9508 18.718 13.5659 19.0926 11.9998 19.0926C8.86633 19.0926 6.21896 17.0785 5.27682 14.2695L1.2373 17.3366C3.19263 21.2953 7.26484 24.0017 11.9998 24.0017C14.9327 24.0017 17.7352 22.959 19.834 21.0012L16.0406 18.0142Z" fill="#34A853"/>
                                 <path d="M19.8342 20.9978C22.0292 18.9503 23.4545 15.9019 23.4545 11.9982C23.4545 11.2891 23.3455 10.5255 23.1818 9.81641H12V14.4528H18.4364C18.1188 16.0119 17.2663 17.2194 16.0407 18.0108L19.8342 20.9978Z" fill="#4A90E2"/>
@@ -356,15 +352,15 @@ export default function Form() {
             Login con Google
             
           </button>
-        
+          </div>
           <div className='cont-remen2'>
-            <p className='cuenta2'>¿No tienes una Cuenta?</p>
-            <Link to={'/Registro'} >
-              Regístrate
+           
+            <Link className='cuenta2' to={'/Registro'} >
+            <p className=''>¿No tienes una Cuenta? Regístrate</p> 
             </Link>
           </div>
           <img src={LoginImg} className='img-Login' alt="" />
-          <div className="feature-border container"></div>
+          <div className="feature-border"></div>
           <h4 className='title-form2'>Juntos Hacemos la Diferencia</h4>
           <img src={LoginImg2} className='img-Login4' alt="" />
         </form>
