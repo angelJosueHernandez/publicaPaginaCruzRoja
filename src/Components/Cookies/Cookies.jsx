@@ -16,16 +16,7 @@ function CookieBanner({ onAccept }) {
   return (
     <div className={`cookie-banner-container ${hidden ? 'hide' : ''}`}>
      
-      <img src={cookieimg} alt="" className="cookie1" />
-      <img src={cookieimg} alt="" className="cookie2" />
-      <img src={cookieimg} alt="" className="cookie3" />
-      <img src={cookieimg} alt="" className="cookie4" />
-      <img src={cookieimg} alt="" className="cookie5" />
-      <img src={cookieimg} alt="" className="cookie6" />
-      <img src={cookieimg} alt="" className="cookie7" />
-      <img src={cookieimg} alt="" className="cookie8" />
-      <img src={cookieimg} alt="" className="cookie9" />
-      <img src={cookieimg} alt="" className="cookie10" />
+  
       <h3 className="title">Cookies</h3>
       <p className="cookie-info">
       Este sitio web utiliza cookies para garantizar que obtengas la mejor experiencia en nuestro sitio web.
