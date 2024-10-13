@@ -28,7 +28,7 @@ import ProtectorRutas from './ProtectedRoute';
 import AuthRoute from './AuthRoute'; // Importa el nuevo componente AuthRoute
 import { DefaultSkeleton } from '../Pages/Servicios/DefaultSkeleton';
 import Conocenos from '../Pages/Conocenos/Conocenos';
-
+import ScrollToTop from '../Components/ScrollToTop/ScrollToTop';
 
 
 export default function Router() {
@@ -55,6 +55,7 @@ export default function Router() {
 
   return (
     <BrowserRouter>
+     <ScrollToTop />
       {showCookieBanner && <CookieBanner className="" onAccept={handleAcceptCookies} />}
       <Nav />
       <div className="mPan"><Breadcrumbs /></div>
@@ -81,7 +82,7 @@ export default function Router() {
 
         {/* Rutas de autenticación */}
         <Route element={<AuthRoute />}>
-          <Route path="Login" element={<Login />} />
+          <Route path="Iniciar Sesion" element={<Login />} />
           <Route path="Registro" element={<Registrer />} />
         </Route>
 

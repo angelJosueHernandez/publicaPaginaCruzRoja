@@ -33,15 +33,18 @@ const profileMenuItems = [
     icon: UserCircleIcon,
     path: "Perfil"
   },
-  {
+  /**
+   * 
+   *{
     label: "Editar Perfil",
     icon: Cog6ToothIcon,
     path: "EditarP"
   },
+   */
   {
     label: "Ayuda",
     icon: LifebuoyIcon,
-    path: "Ayuda"
+    path: "Conocenos"
   },
 ];
 
@@ -119,7 +122,7 @@ export default function Nav() {
       .then(() => {
         setIsAuthenticated(false);
         document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        navigate('/Login');
+        navigate('/Iniciar Sesion');
       });
   };
 

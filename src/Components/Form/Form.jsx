@@ -353,7 +353,7 @@ export default function Form() {
                                 <path d="M19.8342 20.9978C22.0292 18.9503 23.4545 15.9019 23.4545 11.9982C23.4545 11.2891 23.3455 10.5255 23.1818 9.81641H12V14.4528H18.4364C18.1188 16.0119 17.2663 17.2194 16.0407 18.0108L19.8342 20.9978Z" fill="#4A90E2"/>
                                 <path d="M5.27698 14.2663C5.03833 13.5547 4.90909 12.7922 4.90909 11.9984C4.90909 11.2167 5.03444 10.4652 5.2662 9.76294L1.23999 6.64844C0.436587 8.25884 0 10.0738 0 11.9984C0 13.918 0.444781 15.7286 1.23746 17.3334L5.27698 14.2663Z" fill="#FBBC05"/>
                             </svg>
-            Iniciar Sesion con Google
+            Login con Google
             
           </button>
         
@@ -363,10 +363,10 @@ export default function Form() {
               Regístrate
             </Link>
           </div>
-          <img src={LoginImg} className='img-login' alt="" />
+          <img src={LoginImg} className='img-Login' alt="" />
           <div className="feature-border container"></div>
           <h4 className='title-form2'>Juntos Hacemos la Diferencia</h4>
-          <img src={LoginImg2} className='img-login4' alt="" />
+          <img src={LoginImg2} className='img-Login4' alt="" />
         </form>
       </div>
     </div>

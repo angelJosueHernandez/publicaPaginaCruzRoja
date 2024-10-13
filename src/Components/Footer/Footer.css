@@ -81,7 +81,7 @@ footer{
 /*...................................Media Screen 600px................................*/
 @media (max-width: 600px){ 
     .footer-container{
-        grid-template-columns: repeat(1,1fr);
+        grid-template-columns: repeat(2,1fr);
  
     }  
     .svg-container {
@@ -91,4 +91,9 @@ footer{
         width: 100%; /* Ancho completo */
         z-index: 0; /* Asegura que la imagen esté detrás del pie de página */
       }
+}
+
+
+.Title{
+  color: white;
 }

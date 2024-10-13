@@ -8,11 +8,6 @@ export const navLinks = [
     path: '/'
   },
   {
-    name: 'Conocenos',
-    icon: IoMdContacts,
-    path: 'Conocenos'
-  },
-  {
     name: 'Servicios',
     icon: MdMedicalServices,
     path: 'Servicios'
@@ -32,14 +27,9 @@ export const navLinks = [
 
 export const authLinks = [
   {
-    name: 'Login',
+    name: 'Iniciar Sesion',
     icon: FaUserCircle,
-    path: 'Login'
-  },
-  {
-    name: 'Registro',
-    icon: FaRegAddressBook,
-    path: 'Registro'
+    path: 'Iniciar Sesion'
   }
 ];
   
@@ -71,8 +61,8 @@ export const authLinks = [
       {
           id: 1,
           icon: FiUser,  
-          link: 'Login',
-          name: 'Login'
+          link: 'Iniciar Sesion',
+          name: 'Iniciar Sesion'
       },
       {
           id: 2,
@@ -454,34 +444,24 @@ export const authLinks = [
   export const FootersLinksData = {
   
     Nosotros: [
-      { linkname: 'vision ', link: "*", },    
-      { linkname: 'mision ', link: "*", },       
-      { linkname: 'Nuestro equipo', link: "*", },    
-      { linkname: 'Voluntariado ', link: "*", },   
+      { linkname: 'Vision ', link: "Conocenos", },    
+      { linkname: 'Mision ', link: "Conocenos", }
      
     ],    
-    Contenido: [
-      { linkname: 'Inicio ', link: "*", },    
-      { linkname: 'Login ', link: "*", },    
-      { linkname: 'Registro ', link: "*", },    
-      { linkname: 'Donaciones  ', link: "*", },    
-      { linkname: 'Servicios ', link: "*", },   
+    Contenido: [  
+      { linkname: 'Iniciar Sesion ', link: "Iniciar Sesion", },    
+      { linkname: 'Registro ', link: "Registro", },    
+      { linkname: 'Donaciones  ', link: "Donaciones", },    
+      { linkname: 'Servicios ', link: "Servicios", },   
     ],    
   
   
     Help: [
-      { linkname: 'Centro de ayuda', link: "*", },    
-      { linkname: 'Soporte', link: "*", },     
-      { linkname: 'Contactanos', link: "*", },   
+      { linkname: 'Terminos y Condiciones', link: "Terminos", },    
+      { linkname: 'Poliicas de Privacidad', link: "Politicas", },      
     ],  
   
-    socials: [
-      { icon: Facebook, link: 'https://www.facebook.com' },
-      { icon: Tiwitter, link: 'https://www.twitter.com' },
-      { icon: Instagram, link: 'https://www.instagram.com' },
-      { icon: YouTube, link: 'https://www.youtube.com' }
-    ],    
-      
+ 
   };
 
   export const serviciosCruzRoja = [

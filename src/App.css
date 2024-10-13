@@ -203,3 +203,15 @@ section {
     padding: 70px 0 !important;
   }
 }
+
+
+
+
+.main-content {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out; /* Animación de opacidad suave */
+}
+
+.main-content.fade-in {
+  opacity: 1; /* Transición hacia visible cuando se añade la clase fade-in */
+}

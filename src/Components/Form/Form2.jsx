@@ -829,9 +829,9 @@ const showLoader = () => {
           Inicia Sesion
           </Link>
         </div>
-        <img src={LoginImg} className='img-login2' alt="" />
+        <img src={LoginImg} className='img-Login2' alt="" />
            <h4 className='title-form3'>Juntos Hacemos la Diferiencia</h4>
-           <img src={LoginImg2} className='img-login3' alt="" />
+           <img src={LoginImg2} className='img-Login3' alt="" />
            
             </form>
             

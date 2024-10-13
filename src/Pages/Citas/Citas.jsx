@@ -236,7 +236,7 @@ export default function Citas() {
           marginRight: '-960px',
         },
       });
-      navigate('/login');
+      navigate('/Iniciar Sesion');
     } else {
       const horarioSeleccionado = selectedHorario ? selectedHorario.time : '';
       const servicioSeleccionado = selectedServicio ? selectedServicio.ID_Servicio : '';
@@ -294,10 +294,11 @@ export default function Citas() {
       <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-2xl">
         <h2 className="text-[50px] text-red-700 text-center mb-6">Sacar Cita</h2>
         <div className="text-[12px] text-red-800 mb-4 text-center">
+       
          <strong>Las citas deben sacarse con al menos un día de anticipación.</strong> 
         </div>
         <div className="text-[12px] text-red-800 mb-4 text-center">
-         <strong>Para sacar una cita necesita iniciar sesion en su cuenta</strong> 
+         <strong>Para sacar una cita necesita Iniciar Sesion en su cuenta</strong> 
         </div>
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-wrap lg:flex-nowrap justify-between space-y-4 lg:space-y-0 lg:space-x-4">
@@ -423,13 +424,13 @@ export default function Citas() {
             <label className="block text-gray-700 text-sm">Servicio</label>
             <Listbox value={selectedServicio} onChange={handleServicioChange} disabled={isFormDisabled}>
               <div className="relative mt-1">
-                <Listbox.Button className="relative w-1/3 cursor-default rounded-md bg-white py-1 pl-2 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-600 sm:text-sm h-[33px] flex items-center justify-between">
+                <Listbox.Button className="relative  cursor-default rounded-md bg-white py-1 pl-2 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-600 sm:text-sm h-[33px] w-3/5 lg:w-1/2 flex items-center justify-between">
                   <span className="block truncate">{selectedServicio ? selectedServicio.tipo_Servicio : 'Seleccionar servicio'}</span>
                   <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                     <ChevronUpDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
                   </span>
                 </Listbox.Button>
-                <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-1/3  overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-4/5 lg:w-1/2  overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                   {servicios.map((servicio) => (
                     <Listbox.Option
                       key={servicio.ID_Servicio}

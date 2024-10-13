@@ -31,7 +31,7 @@ const ProtectorRutas = ({ children }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to='/Login' />;
+    return <Navigate to='/Iniciar Sesion' />;
   }
 
   return children ? children : <Outlet />;

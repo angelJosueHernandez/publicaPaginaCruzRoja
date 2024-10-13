@@ -6,6 +6,6 @@ import Form2 from '../../../Components/Form/Form2'
 
 export default function Login() {
   return (
-    <div className=' continer-login'><Form/></div>
+    <div className=' continer-Login'><Form/></div>
   )
 }

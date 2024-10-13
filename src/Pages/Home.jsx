@@ -12,7 +12,13 @@ import Ayuda from '../Components/Ayuda/Ayuda'
 import Valores from '../Components/Valores/Valores'
 import SwiperDemo from '../Components/Slider/Slider'
 import VideoY from '../Components/VideoY/VideoY';
-import AnuncioServicios from '../Components/AnuncioServicios/AnuncioServicios';
+import AnuncioServicios from '../Components/ServicionAnuncio/ServicionAnuncio';
+
+
+
+
+
+
 export default function Home() {
  
 
@@ -26,10 +32,11 @@ export default function Home() {
  
   <Quote/> 
    <Valores/>
-    <AnuncioServicios />
+    
  */}
+<AnuncioServicios />
+<SwiperDemo/>
 
- <SwiperDemo/>
    {/*
     <BestSellingBook/>
   <PopularBooks/>

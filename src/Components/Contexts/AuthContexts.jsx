@@ -71,6 +71,9 @@ export const AuthProvider = ({ children }) => {
   const [correoCookieUser, setCorreoCookieUser] = useState(null);
   const [idCookieUser, setIdCookieUser] = useState(null);
   const [nombreCookieUser, setNombreCookieUser] = useState(null);
+  const [perfilLoaded, setPerfilLoaded] = useState(false);
+  const [citasLoaded, setCitasLoaded] = useState(false);
+  const [contratacionLoaded, setContratacionLoaded] = useState(false);
 
   useEffect(() => {
     // Simula la verificación inicial del estado de autenticación
@@ -151,7 +154,13 @@ export const AuthProvider = ({ children }) => {
       setIdCookieUser,
       nombreCookieUser,
       setNombreCookieUser,
-      loading
+      loading,
+      perfilLoaded, 
+      setPerfilLoaded, 
+      citasLoaded, 
+      setCitasLoaded,
+      contratacionLoaded, 
+      setContratacionLoaded
     }}>
       {children}
     </AuthContext.Provider>

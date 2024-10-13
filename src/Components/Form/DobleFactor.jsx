@@ -433,10 +433,10 @@ const showLoader = () => {
          
           <button className='button2' type="submit" >Verificar</button>
 
-          <img src={LoginImg} className='img-login' alt="" />
+          <img src={LoginImg} className='img-Login' alt="" />
           <div className="feature-border container"></div>
           <h4 className='title-form2'>Juntos Hacemos la Diferencia</h4>
-          <img src={LoginImg2} className='img-login4' alt="" />
+          <img src={LoginImg2} className='img-Login4' alt="" />
         </form>
       </div>
     </div>

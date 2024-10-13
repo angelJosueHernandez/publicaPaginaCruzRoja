@@ -1,18 +1,22 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Input, Select } from "antd";
+import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import './Servicios.css';
-const { Search } = Input;
-const { Option } = Select;
-import { CheckIcon } from '@heroicons/react/20/solid';
 import { DefaultSkeleton } from "./DefaultSkeleton";
-import { SearchOutlined } from "@ant-design/icons";
 import ambu from '../../assets/img/ambu.png';
 import ser from '../../assets/img/ser.png';
 import Cookies from 'js-cookie';
 import { useAuth } from "../../Components/Contexts/AuthContexts";
 import { message } from 'antd';
+import x from '../../assets/img/x.png'
+import bu from '../../assets/img/busqueda.png'
+// Importa el ícono que necesitas
+import { CheckIcon } from '@heroicons/react/20/solid';
+
+// URLs de los íconos de Flaticon desde Internet
+
+const { Option } = Select;
 
 const Servicios = () => {
   const navigate = useNavigate();
@@ -91,20 +95,20 @@ const Servicios = () => {
           body: JSON.stringify({ token }),
           credentials: 'include'
         })
-        .then(response => response.json())
-        .then(result => {
-          if (result.mensaje === "Token válido") {
-            const decodedToken = jwtDecode(token);
-            setLogeo(decodedToken.IsAuthenticated);
-            setUserId(decodedToken.id);
-          } else {
+          .then(response => response.json())
+          .then(result => {
+            if (result.mensaje === "Token válido") {
+              const decodedToken = jwtDecode(token);
+              setLogeo(decodedToken.IsAuthenticated);
+              setUserId(decodedToken.id);
+            } else {
+              setLogeo(false);
+            }
+          })
+          .catch(error => {
+            console.error('Error al verificar el token:', error);
             setLogeo(false);
-          }
-        })
-        .catch(error => {
-          console.error('Error al verificar el token:', error);
-          setLogeo(false);
-        });
+          });
       } catch (error) {
         console.error('Error al decodificar el token JWT:', error);
         setLogeo(false);
@@ -119,7 +123,7 @@ const Servicios = () => {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-white-100">
-        <p className="text-gray-700 text-lg">Error al cargar los datos. Por favor, inténtelo más tarde.</p>
+        <p className="text-gray-700 text-[13px]">Error al cargar los datos. Por favor, inténtelo más tarde.</p>
         <img src={ambu} className="imgAm" />
       </div>
     );
@@ -135,15 +139,16 @@ const Servicios = () => {
           duration: 2,
           style: {
             marginTop: '70px',
-            marginRight: '-960px',
           },
         });
-        navigate('/Login');
+        navigate('/Iniciar Sesion');
       }
     } else {
       navigate('/citas');
     }
   };
+
+  const clearSearch = () => setSearch("");
 
   return (
     <div className="container mx-auto px-4">
@@ -155,25 +160,43 @@ const Servicios = () => {
             reciba un tratamiento personalizado acorde a sus necesidades. Nos dedicamos a promover
             la salud y el bienestar de nuestra comunidad, ofreciendo servicios de alta calidad y
             accesibles para todos.
+            
           </p>
         </div>
         <div className="filtros flex justify-end mb-4">
           <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-4">
-            <Input
-              placeholder="Ingrese su búsqueda"
-              value={search}
-              onChange={(e) => searcher(e.target.value)}
-              className="lg:w-1/3"
-              prefix={<SearchOutlined />}
-              style={{ height: '32px', borderRadius: '4px', width: '250px' }}
-            />
+            
+            {/* Input de búsqueda con íconos desde Internet (Flaticon) */}
+            <div className="relative w-full max-w-xs">
+              {/* Ícono de búsqueda */}
+             <img src={bu} alt="" className=" absolute botom-4 top-1/2 ml-4 transform -translate-y-1/2 h-3 w-3 cursor-pointer" />
+              
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Buscar..."
+               className="bg-white outline-none bus py-1 pl-9 pr-2 mt-[15px]   w-full h-[41px] text-[12px] focus:ring-0 focus:bg-white focus:shadow-2xl transition-all duration-300 ease-in-out"
+      
+              />
+
+              {/* Ícono de borrar */}
+              {search && (
+                <img
+                  src={x}
+                  alt="Limpiar"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 cursor-pointer"
+                  onClick={clearSearch}
+                />
+              )}
+            </div>
 
             <Select
               placeholder="Filtrar por Servicios"
               value={filterServicios}
               onChange={setFilterServicios}
-              className="lg:w-1/3"
-              style={{ height: '32px', borderRadius: '4px', width: '170px' }}
+              className="custom-select"
+              style={{ height: '42px', borderRadius: '25px', width: '250px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }} // Estilos personalizados
             >
               <Option value="">Servicios</Option>
               {Array.from(new Set(tiposServicio.map((item) => item.servicio))).map((servicio) => (
@@ -187,8 +210,8 @@ const Servicios = () => {
               placeholder="Filtrar por Costos"
               value={filterCostos}
               onChange={setFilterCostos}
-              className="lg:w-1/3"
-              style={{ height: '32px', borderRadius: '4px', width: '170px' }}
+              className="custom-select"
+              style={{ height: '42px', borderRadius: '25px', width: '250px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }} // Estilos personalizados
             >
               <Option value="">Costos</Option>
               {costRanges.map((range) => (
@@ -197,12 +220,13 @@ const Servicios = () => {
                 </Option>
               ))}
             </Select>
+
           </div>
         </div>
 
         {filteredData.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-screen bg-white-100">
-            <p className="text-gray-700 text-lg">No se encontraron resultados</p> <br />
+            <p className="text-gray-700 text-[13px]">No se encontraron resultados</p> <br />
             <img src={ser} className="imgAm" />
           </div>
         ) : (

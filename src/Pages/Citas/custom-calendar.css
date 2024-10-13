@@ -46,6 +46,7 @@
     border-radius: 100%; /* Ajusta el radio del borde para hacer el círculo más pequeño */
     width: 30px; /* Ajusta el ancho del círculo */
     height: 75px; /* Ajusta la altura del círculo */
+    color: white !important;
 }
 
 @media (max-width: 768px) {

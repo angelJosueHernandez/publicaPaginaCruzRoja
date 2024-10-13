@@ -117,7 +117,7 @@ export default function Restablece() {
                 marginTop: '10vh',
               },
             });
-            navigate('/login');
+            navigate('/Login');
           } else if (result === 'Error en las credenciales') {
             
           }

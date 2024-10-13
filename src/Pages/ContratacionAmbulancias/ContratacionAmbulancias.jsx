@@ -29,6 +29,9 @@ export default function ContratacionForm() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [ambulanciaError, setAmbulanciaError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); 
+
+
 
   const [nombreError, setNombreError] = useState('');
   const [apellidoPaternoError, setApellidoPaternoError] = useState('');
@@ -216,8 +219,8 @@ export default function ContratacionForm() {
       return;
     }
 
-
-    message.loading('Verficando...',1);
+    setIsSubmitting(true); 
+    message.loading('Verficando...',7);
     setTimeout(() => {
     }, 1000);
  
@@ -250,7 +253,9 @@ export default function ContratacionForm() {
 
       if (!response.ok) {
         const data = await response.json();
+        setIsSubmitting(true); 
         throw new Error(data.msg || 'Error en la solicitud');
+        
       }
 
       await fetch('http://localhost:3000/enviar-correo-contratacion', {
@@ -267,17 +272,17 @@ export default function ContratacionForm() {
       });
 
       message.success('Solicitud enviada correctamente a revisión, por favor cheque su correo para llevar el seguimiento correcto del proceso de contratación.');
-      navigate('/Servicios');
+      navigate('/Perfil');
       setSuccessMessage('Registro realizado de manera exitosa',10);
       setErrorMessage('');
     } catch (error) {
+      setIsSubmitting(false); 
       setSuccessMessage('');
-      message.error({
-        content: `Error: ${error.message}`,
+      message.warning({
+        content: ` ${error.message}`,
         duration: 2,
         style: {
           marginTop: '70px',
-          marginRight: '-900px',
         },
       });
       setErrorMessage(`Error: ${error.message}`);
@@ -295,11 +300,9 @@ export default function ContratacionForm() {
             <strong>Nota: Para la contratacion del servicio tome encuenta solicitarla 3 dias antes ya que pasara por un proceso de revision su solicitud.</strong>
           </div>
           <p className="text-[13px] text-gray-600 mb-2">
-            <strong>Nota: Si no sabe cómo llenar un campo, coloque el cursor sobre el símbolo de interrogación para obtener más información.</strong>
+            <strong>Nota: Rellene los campos que faltan.</strong> <br /><br />
           </p>
-          <p className="text-[13px] text-gray-600 mb-4">
-            <strong>Para la contratación de eventos, en Inicio Traslado coloque el lugar del evento y en Escala y Destino Traslado coloque "No aplica".</strong>
-          </p>
+
           {ambulanciaError && (
             <div className="text-red-800 font-bold text-center mb-4">{ambulanciaError}</div>
           )}
@@ -517,19 +520,21 @@ export default function ContratacionForm() {
             </div>
           </div>
           <div className="flex justify-center mt-4">
-            <button
-              className={`bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 ${!validateFields() && 'opacity-50 cursor-not-allowed'}`}
-              type="submit"
-              disabled={!validateFields()}
-            >
-              Enviar Solicitud
-            </button>
-          </div>
+        <button
+          className={`bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 flex items-center justify-center ${isSubmitting ? 'opacity-50 cursor-not-allowed btnCar' : ''}`}
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting && <span className="spinner"></span>} {/* Spinner */}
+          {isSubmitting ? 'Enviando...' : 'Enviar Solicitud'}
+        </button>
+      </div>
+
           {successMessage && <div className="text-red-600 text-[11px] mt-1">{successMessage}</div>}
           {errorMessage && <div className="text-red-600 text-[11px] mt-1">{errorMessage}</div>}
         </form>
         <div className="w-full lg:w-1/3 flex justify-center items-center mt-4 lg:mt-0">
-          <img src={ambulanceImage} alt="Ambulancia" className="max-w-full" />
+          <img src={ambulanceImage} alt="Ambulancia" className="max-w-full ambu" />
         </div>
       </div>
     </div>

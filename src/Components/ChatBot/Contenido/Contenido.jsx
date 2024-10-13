@@ -94,7 +94,7 @@ const Contenido = () => {
                                     navigate('servicios');
                                     return 'preguntaVuelta2';
                                   }},
-                                  { value: "Iniciar Sesion", label: "Iniciar Sesion", trigger: () => {
+                                  { value: "Login", label: "Login", trigger: () => {
                                     navigate('Login');
                                     return 'preguntaVuelta2';
                                   }},

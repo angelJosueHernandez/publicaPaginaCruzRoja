@@ -76,7 +76,7 @@ export default function TableCitas() {
               })
               .catch(error => console.error('Error fetching citas data:', error));
           }
-      }, 60000); // Actualiza cada 60 segundos
+      }, 1000); // Actualiza cada 60 segundos
 
       return () => clearInterval(interval); // Limpiar el intervalo cuando el componente se desmonte
   }, [userData.correo]);

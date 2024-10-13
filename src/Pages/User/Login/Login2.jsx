@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login2 = () => {
+const Iniciar Sesion2 = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="flex w-3/4 shadow-lg">
@@ -16,7 +16,7 @@ const Login2 = () => {
         </div>
         {/* Right Section */}
         <div className="w-1/2 bg-white p-8">
-          <h2 className="text-2xl font-bold mb-4">Login</h2>
+          <h2 className="text-2xl font-bold mb-4">Iniciar Sesion</h2>
           <p className="mb-4">Welcome Back! Please enter your details.</p>
           <form>
             <div className="mb-4">
@@ -73,4 +73,4 @@ const Login2 = () => {
   );
 };
 
-export default Login2;
+export default Iniciar Sesion2;

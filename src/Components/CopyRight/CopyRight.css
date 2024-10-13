@@ -2,6 +2,7 @@
     padding: 30px 0;
     margin-top: 56px;
     border-top: 1px solid var(--color-dark-Ex2);
+    margin-bottom: -40px !important;
 }
 .copy{
     color: var(--color-dark-Ex) ;

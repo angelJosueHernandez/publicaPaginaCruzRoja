@@ -67,8 +67,8 @@ export default function TablePerfil() {
       {<AlertVariants alertType={alertType} alertMessage={showAlert ? alertMessage : ""} />}
       <div className="other-container">
           <div className="px-4 sm:px-0">
-            <h3 className="text-base font-semibold leading-7 text-gray-900">{userData.nombre}</h3>
-            <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">{userData.apellidoP} {userData.apellidoM}</p>
+          <dt className="text-sm mt-1 mb-2 font-medium leading-6 text-gray-900">Nombre:</dt>
+          <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{userData.nombre} {userData.apellidoP} {userData.apellidoM}</dd>
           </div>
         <div className="mt-6 border-t border-gray-100">
           <h3>Información Personal</h3>
